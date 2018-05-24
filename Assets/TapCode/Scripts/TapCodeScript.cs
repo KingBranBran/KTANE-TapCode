@@ -23,6 +23,7 @@ public class TapCodeScript : MonoBehaviour {
     string chosenWord;
     string editedWord;
     string newWord;
+	bool activated;
     bool playCoro;
     bool paused;
     bool holding;
@@ -77,7 +78,7 @@ public class TapCodeScript : MonoBehaviour {
         editedWord = FindEditedWord(newWord);
         DebugLog("Correct word: {0} => {1}", newWord.ToUpperInvariant(), editedWord.ToUpperInvariant());
 
-        
+	    activated = true;
     }
 
     private string SelectWord()
@@ -167,12 +168,17 @@ public class TapCodeScript : MonoBehaviour {
     private void ButtonPressed()
     {
         if (playCoro || modulepass) return;
+	    if (!activated)
+	    {
+		    return;
+	    }
         holding = true;
         StartCoroutine(StartButtonHoldTimer());
     }
 
     private void ButtonReleased()
     {
+	    if (!holding || !activated) return;
         if (modulepass) return;
         holding = false;
         if (playCoro) return;

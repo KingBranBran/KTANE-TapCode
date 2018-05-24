@@ -167,7 +167,12 @@ public class TapCodeScript : MonoBehaviour {
 
     private void ButtonPressed()
     {
-        if (playCoro || modulepass) return;
+	    if (releaseCoroutine != null)
+	    {
+		    StopCoroutine(releaseCoroutine);
+	    }
+
+		if (playCoro || modulepass) return;
 	    if (!activated)
 	    {
 		    return;
@@ -198,11 +203,6 @@ public class TapCodeScript : MonoBehaviour {
             paused = false;
         }
         pressCount++;
-        
-        if (releaseCoroutine != null)
-        {
-            StopCoroutine(releaseCoroutine);
-        }
 
         releaseCoroutine = StartCoroutine(StartButtonReleaseTimer());
     }

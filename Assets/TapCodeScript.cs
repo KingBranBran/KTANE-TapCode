@@ -69,7 +69,6 @@ public class TapCodeScript : MonoBehaviour
         Sel.OnInteractEnded += SelRelease;
 
         var SerialNumber = BombInfo.GetSerialNumber();
-        SerialNumber = "P98XR0";
         var movementIx = SerialNumber[5] - '0';
         if (movementIx == 0)
             for (int i = 0; i < 6; i++)
@@ -79,7 +78,6 @@ public class TapCodeScript : MonoBehaviour
         Debug.LogFormat("[Tap Code #{0}] Serial number digit: {1}", _moduleId, movementIx);
 
         var wordIx = Rnd.Range(0, 100);
-        wordIx = 20;
         _chosenWord = _wordList[wordIx];
 
         X = wordIx % 10;
